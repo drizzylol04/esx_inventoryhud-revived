@@ -36,7 +36,7 @@ function setStorageInventoryData(data)
 
     if blackMoney > 0 then
         accountData = {
-            label = _U("black_money"),
+            label = Translate("black_money"),
             count = blackMoney,
             type = "item_account",
             name = "black_money",
@@ -65,7 +65,7 @@ function setStorageInventoryData(data)
     for i = 1, #storageWeapons, 1 do
         local weapon = storageWeapons[i]
 
-        if storageWeapons[i].name ~= "WEAPON_UNARMED" then
+        if storageWeapons[i].name ~= "WEAPONTranslateNARMED" then
             table.insert(
                 items,
                 {
@@ -115,7 +115,7 @@ RegisterNUICallback(
             local count = tonumber(data.number)
 
             if data.item.type == "item_weapon" then
-                count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
+                count = GetAmmoInPedWeapon(ESX.PlayerData.ped, GetHashKey(data.item.name))
             end
 
             TriggerServerEvent("esx_inventoryhud:putStorageItem", lastStorage, data.item.type, data.item.name, count)

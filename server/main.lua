@@ -71,10 +71,10 @@ RegisterCommand(
 			if targetXPlayer ~= nil then
 				TriggerClientEvent("esx_inventoryhud:openPlayerInventory", source, target, targetXPlayer.name)
 			else
-				TriggerClientEvent("chatMessage", source, "^1" .. _U("no_player"))
+				TriggerClientEvent("chatMessage", source, "^1" .. Translate("no_player"))
 			end
 		else
-			TriggerClientEvent("chatMessage", source, "^1" .. _U("no_permissions"))
+			TriggerClientEvent("chatMessage", source, "^1" .. Translate("no_permissions"))
 		end
 	end
 )
@@ -95,7 +95,7 @@ AddEventHandler(
 						"pNotify:SendNotification",
 						_source,
 						{
-							text = _U("not_enough_space"),
+							text = Translate("not_enough_space"),
 							type = "error",
 							timeout = 3000
 						}
@@ -111,7 +111,7 @@ AddEventHandler(
 							"pNotify:SendNotification",
 							_source,
 							{
-								text = _U("bought", amount, item.label, item.price),
+								text = Translate("bought", amount, item.label, item.price),
 								type = "success",
 								timeout = 3000
 							}
@@ -121,7 +121,7 @@ AddEventHandler(
 							"pNotify:SendNotification",
 							_source,
 							{
-								text = _U("not_enough_money"),
+								text = Translate("not_enough_money"),
 								type = "error",
 								timeout = 3000
 							}
@@ -139,7 +139,7 @@ AddEventHandler(
 						"pNotify:SendNotification",
 						_source,
 						{
-							text = _U("bought", 1, item.label, item.price),
+							text = Translate("bought", 1, item.label, item.price),
 							type = "success",
 							timeout = 3000
 						}
@@ -149,7 +149,7 @@ AddEventHandler(
 						"pNotify:SendNotification",
 						_source,
 						{
-							text = _U("already_have_weapon"),
+							text = Translate("already_have_weapon"),
 							type = "error",
 							timeout = 3000
 						}
@@ -160,7 +160,7 @@ AddEventHandler(
 					"pNotify:SendNotification",
 					_source,
 					{
-						text = _U("not_enough_money"),
+						text = Translate("not_enough_money"),
 						type = "error",
 						timeout = 3000
 					}

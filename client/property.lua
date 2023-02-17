@@ -26,7 +26,7 @@ function setPropertyInventoryData(data)
 
     if blackMoney > 0 then
         accountData = {
-            label = _U("black_money"),
+            label = Translate("black_money"),
             count = blackMoney,
             type = "item_account",
             name = "black_money",
@@ -55,7 +55,7 @@ function setPropertyInventoryData(data)
     for i = 1, #propertyWeapons, 1 do
         local weapon = propertyWeapons[i]
 
-        if propertyWeapons[i].name ~= "WEAPON_UNARMED" then
+        if propertyWeapons[i].name ~= "WEAPONTranslateNARMED" then
             table.insert(
                 items,
                 {
@@ -105,7 +105,7 @@ RegisterNUICallback(
             local count = tonumber(data.number)
 
             if data.item.type == "item_weapon" then
-                count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
+                count = GetAmmoInPedWeapon(ESX.PlayerData.ped, GetHashKey(data.item.name))
             end
 
             TriggerServerEvent("esx_property:putItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)

@@ -1,14 +1,14 @@
 local targetPlayer
 local targetPlayerName
 
-Citizen.CreateThread(
+CreateThread(
     function()
         TriggerEvent(
             "chat:addSuggestion",
             "/openinventory",
-            _U("openinv_help"),
+            Translate("openinv_help"),
             {
-                {name = _U("openinv_id"), help = _U("openinv_help")}
+                {name = Translate("openinv_id"), help = Translate("openinv_help")}
             }
         )
     end
@@ -45,7 +45,7 @@ function setPlayerInventoryData()
             SendNUIMessage(
                 {
                     action = "setInfoText",
-                    text = "<strong>" .. _U("player_inventory") .. "</strong><br>" .. targetPlayerName .. " (" .. targetPlayer .. ")"
+                    text = "<strong>" .. Translate("player_inventory") .. "</strong><br>" .. targetPlayerName .. " (" .. targetPlayer .. ")"
                 }
             )
 
@@ -58,7 +58,7 @@ function setPlayerInventoryData()
             if Config.IncludeCash and money ~= nil and money > 0 then
                 for key, value in pairs(accounts) do
                     moneyData = {
-                        label = _U("cash"),
+                        label = Translate("cash"),
                         name = "cash",
                         type = "item_money",
                         count = money,
@@ -109,7 +109,7 @@ function setPlayerInventoryData()
                 for key, value in pairs(weapons) do
                     local weaponHash = GetHashKey(weapons[key].name)
                     local playerPed = GetPlayerPed(GetPlayerFromServerId(targetPlayer))
-                    if weapons[key].name ~= "WEAPON_UNARMED" then
+                    if weapons[key].name ~= "WEAPONTranslateNARMED" then
                         local ammo = weapons[key].ammo
                         table.insert(
                             items,

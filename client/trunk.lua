@@ -31,7 +31,7 @@ function setTrunkInventoryData(data, blackMoney, inventory, weapons)
 
     if blackMoney > 0 then
         accountData = {
-            label = _U("black_money"),
+            label = Translate("black_money"),
             count = blackMoney,
             type = "item_account",
             name = "black_money",
@@ -61,7 +61,7 @@ function setTrunkInventoryData(data, blackMoney, inventory, weapons)
     if Config.IncludeWeapons and weapons ~= nil then
         for key, value in pairs(weapons) do
             local weaponHash = GetHashKey(weapons[key].name)
-            if weapons[key].name ~= "WEAPON_UNARMED" then
+            if weapons[key].name ~= "WEAPONTranslateNARMED" then
                 table.insert(
                     items,
                     {
@@ -112,7 +112,7 @@ RegisterNUICallback(
             local count = tonumber(data.number)
 
             if data.item.type == "item_weapon" then
-                count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
+                count = GetAmmoInPedWeapon(ESX.PlayerData.ped, GetHashKey(data.item.name))
             end
 
             ESX.TriggerServerCallback(

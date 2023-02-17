@@ -68,7 +68,7 @@ AddEventHandler(
                                 "pNotify:SendNotification",
                                 _source,
                                 {
-                                    text = _U("not_enough_space"),
+                                    text = Translate("not_enough_space"),
                                     type = "error",
                                     timeout = 3000
                                 }
@@ -83,7 +83,7 @@ AddEventHandler(
                                 "pNotify:SendNotification",
                                 _source,
                                 {
-                                    text = _U("took_from_storage", count, inventoryItem.label),
+                                    text = Translate("took_from_storage", count, inventoryItem.label),
                                     type = "success",
                                     timeout = 3000
                                 }
@@ -94,7 +94,7 @@ AddEventHandler(
                             "pNotify:SendNotification",
                             _source,
                             {
-                                text = _U("took_not_enough"),
+                                text = Translate("took_not_enough"),
                                 type = "error",
                                 timeout = 3000
                             }
@@ -119,7 +119,7 @@ AddEventHandler(
                             "pNotify:SendNotification",
                             xPlayer.source,
                             {
-                                text = _U("bad_amount"),
+                                text = Translate("bad_amount"),
                                 type = "error",
                                 timeout = 3000
                             }
@@ -190,7 +190,7 @@ AddEventHandler(
                             "pNotify:SendNotification",
                             _source,
                             {
-                                text = _U("put_into_storage", count, inventoryItem.label),
+                                text = Translate("put_into_storage", count, inventoryItem.label),
                                 type = "success",
                                 timeout = 3000
                             }
@@ -202,7 +202,7 @@ AddEventHandler(
                     "pNotify:SendNotification",
                     xPlayer.source,
                     {
-                        text = _U("bad_amount"),
+                        text = Translate("bad_amount"),
                         type = "error",
                         timeout = 3000
                     }
@@ -228,7 +228,7 @@ AddEventHandler(
                     "pNotify:SendNotification",
                     xPlayer.source,
                     {
-                        text = _U("bad_amount"),
+                        text = Translate("bad_amount"),
                         type = "error",
                         timeout = 3000
                     }

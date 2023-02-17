@@ -77,26 +77,11 @@ local Keys = {
 }
 
 isInInventory = false
-ESX = nil
 
-Citizen.CreateThread(
-    function()
-        while ESX == nil do
-            TriggerEvent(
-                "esx:getSharedObject",
-                function(obj)
-                    ESX = obj
-                end
-            )
-            Citizen.Wait(0)
-        end
-    end
-)
-
-Citizen.CreateThread(
+CreateThread(
     function()
         while true do
-            Citizen.Wait(0)
+            Wait(0)
             if IsControlJustReleased(0, Config.OpenControl) and IsInputDisabled(0) then
                 openInventory()
             end
@@ -138,7 +123,7 @@ RegisterNUICallback(
 RegisterNUICallback(
     "GetNearPlayers",
     function(data, cb)
-        local playerPed = PlayerPedId()
+        local playerPed = ESX.PlayerData.ped
         local players, nearbyPlayer = ESX.Game.GetPlayersInArea(GetEntityCoords(playerPed), 3.0)
         local foundPlayers = false
         local elements = {}
@@ -160,7 +145,7 @@ RegisterNUICallback(
         if not foundPlayers then
             exports.pNotify:SendNotification(
                 {
-                    text = _U("players_nearby"),
+                    text = Translate("players_nearby"),
                     type = "error",
                     timeout = 3000,
                     layout = "bottomCenter",
@@ -190,7 +175,7 @@ RegisterNUICallback(
         if shouldCloseInventory(data.item.name) then
             closeInventory()
         else
-            Citizen.Wait(250)
+            Wait(250)
             loadPlayerInventory()
         end
 
@@ -201,7 +186,7 @@ RegisterNUICallback(
 RegisterNUICallback(
     "DropItem",
     function(data, cb)
-        if IsPedSittingInAnyVehicle(playerPed) then
+        if IsPedSittingInAnyVehicle(ESX.PlayerData.ped) then
             return
         end
 
@@ -219,7 +204,7 @@ RegisterNUICallback(
 RegisterNUICallback(
     "GiveItem",
     function(data, cb)
-        local playerPed = PlayerPedId()
+        local playerPed = ESX.PlayerData.ped
         local players, nearbyPlayer = ESX.Game.GetPlayersInArea(GetEntityCoords(playerPed), 3.0)
         local foundPlayer = false
         for i = 1, #players, 1 do
@@ -234,7 +219,7 @@ RegisterNUICallback(
             local count = tonumber(data.number)
 
             if data.item.type == "item_weapon" then
-                count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
+                count = GetAmmoInPedWeapon(ESX.PlayerData.ped, GetHashKey(data.item.name))
             end
 
             TriggerServerEvent("esx:giveInventoryItem", data.player, data.item.type, data.item.name, count)
@@ -243,7 +228,7 @@ RegisterNUICallback(
         else
             exports.pNotify:SendNotification(
                 {
-                    text = _U("player_nearby"),
+                    text = Translate("player_nearby"),
                     type = "error",
                     timeout = 3000,
                     layout = "bottomCenter",
@@ -287,7 +272,7 @@ function loadPlayerInventory()
 
             if Config.IncludeCash and money ~= nil and money > 0 then
                 moneyData = {
-                    label = _U("cash"),
+                    label = Translate("cash"),
                     name = "cash",
                     type = "item_money",
                     count = money,
@@ -336,8 +321,8 @@ function loadPlayerInventory()
             if Config.IncludeWeapons and weapons ~= nil then
                 for key, value in pairs(weapons) do
                     local weaponHash = GetHashKey(weapons[key].name)
-                    local playerPed = PlayerPedId()
-                    if HasPedGotWeapon(playerPed, weaponHash, false) and weapons[key].name ~= "WEAPON_UNARMED" then
+                    local playerPed = ESX.PlayerData.ped
+                    if HasPedGotWeapon(playerPed, weaponHash, false) and weapons[key].name ~= "WEAPONTranslateNARMED" then
                         local ammo = GetAmmoInPedWeapon(playerPed, weaponHash)
                         table.insert(
                             items,
@@ -367,12 +352,12 @@ function loadPlayerInventory()
     )
 end
 
-Citizen.CreateThread(
+CreateThread(
     function()
         while true do
-            Citizen.Wait(1)
+            Wait(1)
             if isInInventory then
-                local playerPed = PlayerPedId()
+                local playerPed = ESX.PlayerData.ped
                 DisableControlAction(0, 1, true) -- Disable pan
                 DisableControlAction(0, 2, true) -- Disable tilt
                 DisableControlAction(0, 24, true) -- Attack
