@@ -1,9 +1,7 @@
-# esx_inventoryhud 2.3.0
-Inventory HUD for ESX. You can open and close inventory using F2. Part of code was taken from [es_extended](https://github.com/ESX-Org/es_extended).
+<h1 align='center'>[ESX] Inventory HUD </a></h1><p align='center'><b>2023 Remaster By Mycroft</b></p>
 
 ## Requirements
-* [es_extended](https://github.com/esx-framework/es_extended/tree/v1-final) - version v1
-* [pNotify](https://forum.fivem.net/t/release-pnotify-in-game-js-notifications-using-noty/20659)
+* ESX Legacy
 
 ## Features
 - Drag and drop

@@ -1,13 +1,15 @@
 fx_version "adamant"
 game "gta5"
 
-author "Trsak"
+author "Trsak & Mycroft"
 
-description "ESX Inventory HUD"
+description "ESX Inventory HUD 2023 Remaster"
 
 version "2.4.0"
 
 ui_page "html/ui.html"
+
+shared_script '@es_extended/imports.lua'
 
 client_scripts {
   "@es_extended/locale.lua",
