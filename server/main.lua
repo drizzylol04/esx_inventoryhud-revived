@@ -91,41 +91,16 @@ AddEventHandler(
 
 			if amount > 0 then
 				if playerItem.limit ~= -1 and (playerItem.count + amount) > playerItem.limit then
-					TriggerClientEvent(
-						"pNotify:SendNotification",
-						_source,
-						{
-							text = Translate("not_enough_space"),
-							type = "error",
-							timeout = 3000
-						}
-					)
+                    TriggerClientEvent('esx:showNotification', _source, Translate("not_enough_space"), 'error', 3000)
 				else
 					local price = amount * item.price
 
 					if xPlayer.getMoney() >= price then
 						xPlayer.removeMoney(price)
 						xPlayer.addInventoryItem(item.name, amount)
-
-						TriggerClientEvent(
-							"pNotify:SendNotification",
-							_source,
-							{
-								text = Translate("bought", amount, item.label, item.price),
-								type = "success",
-								timeout = 3000
-							}
-						)
+                        TriggerClientEvent('esx:showNotification', _source, Translate("bought", amount, item.label, item.price), 'error', 3000)
 					else
-						TriggerClientEvent(
-							"pNotify:SendNotification",
-							_source,
-							{
-								text = Translate("not_enough_money"),
-								type = "error",
-								timeout = 3000
-							}
-						)
+                        TriggerClientEvent('esx:showNotification', _source, Translate("not_enough_money"), 'error', 3000)
 					end
 				end
 			end
@@ -134,37 +109,12 @@ AddEventHandler(
 				if not xPlayer.hasWeapon(item.name) then
 					xPlayer.removeMoney(item.price)
 					xPlayer.addWeapon(item.name, item.ammo)
-
-					TriggerClientEvent(
-						"pNotify:SendNotification",
-						_source,
-						{
-							text = Translate("bought", 1, item.label, item.price),
-							type = "success",
-							timeout = 3000
-						}
-					)
+                    TriggerClientEvent('esx:showNotification', _source, Translate("bought", 1, item.label, item.price), 'success', 3000)
 				else
-					TriggerClientEvent(
-						"pNotify:SendNotification",
-						_source,
-						{
-							text = Translate("already_have_weapon"),
-							type = "error",
-							timeout = 3000
-						}
-					)
+                    TriggerClientEvent('esx:showNotification', _source, Translate("already_have_weapon"), 'error', 3000)
 				end
 			else
-				TriggerClientEvent(
-					"pNotify:SendNotification",
-					_source,
-					{
-						text = Translate("not_enough_money"),
-						type = "error",
-						timeout = 3000
-					}
-				)
+                TriggerClientEvent('esx:showNotification', _source, Translate("not_enough_money"), 'error', 3000)
 			end
 		end
 	end
