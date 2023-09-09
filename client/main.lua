@@ -143,15 +143,7 @@ RegisterNUICallback(
         end
 
         if not foundPlayers then
-            exports.pNotify:SendNotification(
-                {
-                    text = Translate("players_nearby"),
-                    type = "error",
-                    timeout = 3000,
-                    layout = "bottomCenter",
-                    queue = "inventoryhud"
-                }
-            )
+            ESX.ShowNotification(Translate("players_nearby"), 3000, 'error')
         else
             SendNUIMessage(
                 {
@@ -219,22 +211,14 @@ RegisterNUICallback(
             local count = tonumber(data.number)
 
             if data.item.type == "item_weapon" then
-                count = GetAmmoInPedWeapon(ESX.PlayerData.ped, GetHashKey(data.item.name))
+                count = GetAmmoInPedWeapon(playerPed, GetHashKey(data.item.name))
             end
 
             TriggerServerEvent("esx:giveInventoryItem", data.player, data.item.type, data.item.name, count)
             Wait(250)
             loadPlayerInventory()
         else
-            exports.pNotify:SendNotification(
-                {
-                    text = Translate("player_nearby"),
-                    type = "error",
-                    timeout = 3000,
-                    layout = "bottomCenter",
-                    queue = "inventoryhud"
-                }
-            )
+            ESX.ShowNotification(Translate("player_nearby"), 3000, 'error')
         end
         cb("ok")
     end
@@ -322,7 +306,7 @@ function loadPlayerInventory()
                 for key, value in pairs(weapons) do
                     local weaponHash = GetHashKey(weapons[key].name)
                     local playerPed = ESX.PlayerData.ped
-                    if HasPedGotWeapon(playerPed, weaponHash, false) and weapons[key].name ~= "WEAPONTranslateNARMED" then
+                    if HasPedGotWeapon(playerPed, weaponHash, false) and weapons[key].name ~= "WEAPON_UNNARMED" then
                         local ammo = GetAmmoInPedWeapon(playerPed, weaponHash)
                         table.insert(
                             items,
@@ -357,7 +341,6 @@ CreateThread(
         while true do
             Wait(1)
             if isInInventory then
-                local playerPed = ESX.PlayerData.ped
                 DisableControlAction(0, 1, true) -- Disable pan
                 DisableControlAction(0, 2, true) -- Disable tilt
                 DisableControlAction(0, 24, true) -- Attack
